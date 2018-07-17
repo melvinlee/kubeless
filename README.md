@@ -1,4 +1,6 @@
-# Kubeless
+# [Kubeless](https://kubeless.io/)
+
+> Kubeless is a Kubernetes-native serverless framework that lets you deploy small bits of code (functions) without having to worry about the underlying infrastructure.
 
 ## Quickstart
 
