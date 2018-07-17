@@ -113,3 +113,17 @@ $ kubectl proxy &
 $ curl -L --data "Peter" \
   localhost:8001/api/v1/namespaces/default/services/hellojs:http-function-port/proxy/
 ```
+
+## Cleanup
+
+Finally, let's cleanup everything.
+
+```sh
+$ kubectl delete ns kubeless
+namespace "kubeless" deleted
+
+$ kubectl delete customresourcedefinition --all
+customresourcedefinition.apiextensions.k8s.io "cronjobtriggers.kubeless.io" deleted
+customresourcedefinition.apiextensions.k8s.io "functions.kubeless.io" deleted
+customresourcedefinition.apiextensions.k8s.io "httptriggers.kubeless.io" deleted
+```
