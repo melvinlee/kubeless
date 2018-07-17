@@ -103,3 +103,13 @@ Call the function with:
 $ kubeless function call hellojs --data 'John'
 "hello, John!"
 ```
+
+Or you can curl directly with kubectl proxyusing an apiserver proxy URL.
+For example:
+
+```sh
+$ kubectl proxy &
+
+$ curl -L --data "Peter" \
+  localhost:8001/api/v1/namespaces/default/services/hellojs:http-function-port/proxy/
+```
