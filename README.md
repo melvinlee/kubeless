@@ -64,3 +64,42 @@ $ kubeless get-server-config
 INFO[0000] Current Server Config:
 INFO[0000] Supported Runtimes are: python2.7, python3.4, python3.6, nodejs6, nodejs8, nodejs_distroless8, ruby2.4, php7.2, go1.10, dotnetcore2.0, java1.8, ballerina0.980.0, jvm1.8
 ```
+
+## Sample function
+
+Let's create the following node.js sample `nodejs-test.js`
+
+```js
+module.exports.handler = (event,context) => {
+      console.log(event);
+      let greeting = `hello, ${event.data}!`;
+      return JSON.stringify(greeting);
+}
+```
+
+and deploy function with:
+
+```sh
+$ kubeless function deploy hellojs \
+--runtime nodejs8 \
+--handler hello.handler \
+--from-file hello.js
+INFO[0000] Deploying function...
+INFO[0000] Function hellojs submitted for deployment
+INFO[0000] Check the deployment status executing 'kubeless function ls hellojs'
+```
+
+Check the function creation status:
+
+```sh
+$ kubeless function ls
+NAME    NAMESPACE       HANDLER         RUNTIME DEPENDENCIES    STATUS
+hellojs default         hello.handler   nodejs8                 1/1 READY
+```
+
+Call the function with:
+
+```sh
+$ kubeless function call hellojs --data 'John'
+"hello, John!"
+```
